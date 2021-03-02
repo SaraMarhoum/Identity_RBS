@@ -1,0 +1,9 @@
+CREATE DATABASE std; 
+
+create table tablestd(
+id int not null Primary Key identity(1,1),
+nom varchar(150) ,
+prenom varchar(150),
+cin varchar(150),
+adresse varchar(150)
+);
