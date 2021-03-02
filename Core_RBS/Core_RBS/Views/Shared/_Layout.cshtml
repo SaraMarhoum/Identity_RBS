@@ -1,0 +1,130 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Core_RBS</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" rel="stylesheet">
+    <!-- Add icon library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+<body>
+    <header style="background-image: url('https://flevix.com/wp-content/uploads/2020/01/Web-Header-Background-1.svg'); background-size: cover; height: 10rem; background-position-y: 32rem;">
+        <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
+            <a style="font-weight:bolder" class="navbar-brand text-white" asp-area="" asp-controller="Home" asp-action="Index">Gestion des étudiants</a>
+            @*<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>*@
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto ml-5">
+                    <li class="nav-item active">
+                        <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" asp-area="" asp-controller="Student" asp-action="Index">Students</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            CRUD
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" asp-controller="Student" asp-action="Create">Ajouter</a>
+                            <a class="dropdown-item" href="#">Supprimer</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Editer</a>
+                            <a class="dropdown-item" href="#">Détail</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" asp-area="" asp-controller="Role" asp-action="Index">Role</a>
+                    </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0 mr-4" method="get" asp-controller="Student" asp-action="Index">
+                    <input class="form-control mr-sm-4" type="search" placeholder="Entrez un nom ou CIN..." value="@ViewData["getstudentdetails"]" name="Stdsearch" style="width: 254px;">
+                    <button class="btn btn-outline-danger my-2 my-sm-0 text-white" type="submit" value="Search">Chercher</button>
+                </form>
+                <partial name="_LoginPartial.cshtml" />
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="page-footer font-small unique-color-dark font-weight-bold  text-center" id="footer">
+        <div style="background-color: #e3e3e3;">
+            <div classe="container">
+                <div class=" py-4 d-flex align-items-center">
+                    <div class="col-md-6 col-lg-6 text-center text-dark mb-4 mb-md-0">
+                        <h5 class="mb-0 font-weight-bold ">Rejoins nous sur les réseaux sociaux !</h5>
+                    </div>
+
+                    <div class="flex-center col-lg-6">
+                        <a class="fb-ic">
+                            <i class="fab fa-facebook-f fa-lg mr-4" style="color: orangered;"></i>
+                        </a>
+
+                        <a class="tw-ic">
+                            <i class="fab fa-twitter fa-lg mr-4" style="color: orangered;"></i>
+                        </a>
+
+                        <a class="gplus-ic">
+                            <i class="fab fa-google-plus-g fa-lg mr-4" style="color: orangered;"></i>
+                        </a>
+
+                        <a class="li-ic">
+                            <i class="fab fa-linkedin-in fa-lg mr-4" style="color: orangered;"></i>
+                        </a>
+
+                        <a class="ins-ic">
+                            <i class="fab fa-instagram fa-lg mr-4" style="color: orangered;"></i>
+                        </a>
+
+                        <a class="pin-ic">
+                            <i class="fab fa-pinterest fa-lg mr-4" style="color: orangered;"></i>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="footer-copyright text-center py-3 text-dark">
+                &copy; 2021 - Authentificaton - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            </div>
+
+        </div>
+
+
+    </footer>
+
+    @*<footer class="border-top footer text-muted">
+            <div class="container">
+                &copy; 2021 - Core_RBS - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            </div>
+        </footer>*@
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+
+    <script>
+        $(document).ready(function () {
+            var docHeight = $(window).height();
+            var footerHeight = $('#footer').height();
+            var footerTop = $('#footer').position().top + footerHeight;
+
+            if (footerTop < docHeight)
+                $('#footer').css('margin-top', 10 + (docHeight - footerTop) + 'px');
+        });
+    </script>
+
+</body>
+</html>
